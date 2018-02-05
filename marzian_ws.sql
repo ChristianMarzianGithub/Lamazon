@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 05. Feb 2018 um 20:26
+-- Erstellungszeit: 05. Feb 2018 um 20:42
 -- Server-Version: 10.1.29-MariaDB
 -- PHP-Version: 7.2.0
 
@@ -34,6 +34,35 @@ CREATE TABLE `hersteller` (
   `WebAdresse` text NOT NULL,
   `EMail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `hersteller`
+--
+
+INSERT INTO `hersteller` (`Hid`, `Name`, `WebAdresse`, `EMail`) VALUES
+(1, 'Hewlett Packard', 'http://www.hp.de/', 'info@hp.de'),
+(2, 'Siemens', 'www.siemens.de', 'support@siemens.de'),
+(3, 'Medion', 'www.medion.de', 'support@medion.de');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `kategorie`
+--
+
+CREATE TABLE `kategorie` (
+  `KatID` int(11) NOT NULL,
+  `Beschreibung` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `kategorie`
+--
+
+INSERT INTO `kategorie` (`KatID`, `Beschreibung`) VALUES
+(1, 'Scanner'),
+(2, 'Monitore'),
+(3, 'Drucker');
 
 -- --------------------------------------------------------
 
@@ -68,6 +97,24 @@ CREATE TABLE `produkt` (
   `Preis` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `produkt`
+--
+
+INSERT INTO `produkt` (`ArtNr`, `Name`, `Beschreibung`, `Preis`) VALUES
+(1, 'HP ScanJet3300C', 'Flachbettscanner', '99'),
+(2, 'HP ScanJet 2220A', 'Flachbettscanner', '56'),
+(3, 'HP LaseerJet 3477C', 'Laserdrucker', '299'),
+(4, 'HP LaserJet 7769 C', 'Farblaserdrucker', '1590'),
+(5, 'MD 1772 JC', 'Monitor', '150'),
+(6, 'MD 6155 AH', '17 Zoll TFT Bildschirm', '350'),
+(7, 'MD 1334 S', 'Flachbettscanner', '65'),
+(8, 'MD 2443 S', 'Flachbettscanner', '76'),
+(9, 'SI 1221 C', '19 Zoll Monitor', '200'),
+(10, 'SI 7822 TFT', '21 Zoll TFT-Monitor', '569'),
+(11, 'SI P 3244', 'DIN A1 Plotter', '1590'),
+(12, 'SI D 1121 C', 'Farblaserdrucker', '547');
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +136,12 @@ CREATE TABLE `rechnung` (
 --
 ALTER TABLE `hersteller`
   ADD PRIMARY KEY (`Hid`);
+
+--
+-- Indizes für die Tabelle `kategorie`
+--
+ALTER TABLE `kategorie`
+  ADD PRIMARY KEY (`KatID`);
 
 --
 -- Indizes für die Tabelle `kunde`
@@ -116,7 +169,13 @@ ALTER TABLE `rechnung`
 -- AUTO_INCREMENT für Tabelle `hersteller`
 --
 ALTER TABLE `hersteller`
-  MODIFY `Hid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Hid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT für Tabelle `kategorie`
+--
+ALTER TABLE `kategorie`
+  MODIFY `KatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `kunde`
@@ -128,7 +187,7 @@ ALTER TABLE `kunde`
 -- AUTO_INCREMENT für Tabelle `produkt`
 --
 ALTER TABLE `produkt`
-  MODIFY `ArtNr` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ArtNr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `rechnung`
