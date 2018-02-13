@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 05. Feb 2018 um 20:42
--- Server-Version: 10.1.29-MariaDB
--- PHP-Version: 7.2.0
+-- Erstellungszeit: 13. Feb 2018 um 12:55
+-- Server-Version: 10.1.30-MariaDB
+-- PHP-Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `marzian_ws`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `benutzer`
+--
+
+CREATE TABLE `benutzer` (
+  `BenutzerID` int(11) NOT NULL,
+  `Kennung` text NOT NULL,
+  `Passwort` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `benutzer`
+--
+
+INSERT INTO `benutzer` (`BenutzerID`, `Kennung`, `Passwort`) VALUES
+(1, 'Test', 'TestPasswort'),
+(2, 'admin', 'root');
 
 -- --------------------------------------------------------
 
@@ -132,6 +152,12 @@ CREATE TABLE `rechnung` (
 --
 
 --
+-- Indizes für die Tabelle `benutzer`
+--
+ALTER TABLE `benutzer`
+  ADD PRIMARY KEY (`BenutzerID`);
+
+--
 -- Indizes für die Tabelle `hersteller`
 --
 ALTER TABLE `hersteller`
@@ -164,6 +190,12 @@ ALTER TABLE `rechnung`
 --
 -- AUTO_INCREMENT für exportierte Tabellen
 --
+
+--
+-- AUTO_INCREMENT für Tabelle `benutzer`
+--
+ALTER TABLE `benutzer`
+  MODIFY `BenutzerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `hersteller`
