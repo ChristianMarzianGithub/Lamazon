@@ -8,17 +8,33 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;		
+
 }
 #login{
 	 display: flex;
 
     justify-content: center;
-	max-width: 50%;
+
 	border: 1px solid black;
 }
-.Aligner {
-  display: flex;
-  align-items: center;
-  min-height: 50em;
-  justify-content: center;
+
+#logoAnmeldung{
+	display: flex;
+	justify-content: center;
+}
+.Aligner {		
+	width: 300px;
+    height: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.wrapperLogin{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.btn-primary,.btn-primary:hover,  .btn-primary:active, .btn-primary:visited {
+    background-color: #feae3d !important;
 }
