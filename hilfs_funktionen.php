@@ -74,4 +74,24 @@
 			print_r($_SESSION);
 		}
 	}
+	function login($kennung, $password, $dbh)	{
+		$loginCorrect = false;
+		
+		$resultPassword = db_query("SELECT PASSWORT FROM KUNDE WHERE KENNUNG ='test'", $dbh);
+		$resultPasswordString = mysqli_fetch_row($resultPassword);		
+		if($password == $resultPasswordString[0]){
+			$loginCorrect = true;
+		}
+		return $loginCorrect;
+	}
+	function loginForm(){
+		$output = "Anmeldung nicht erfolgreich </br><a href='ws1.php'>zur&uuml;ck zum Login</a>";		
+		$dbh = db_connect('marzian_ws');
+		if(login($_POST['kennung'],$_POST['password'],$dbh)){
+			$output = "Anmeldung erfolgreich";
+			$output = $output."</br><a href='shop1.php'>zur Produktauswahl</a>";
+			$_SESSION['kennung'] = $_POST['kennung'];
+		}
+		return $output;
+	}
 ?>

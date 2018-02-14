@@ -10,10 +10,9 @@ session_start();
 	<link rel="stylesheet" href="style.css">
 </head>
 
-<body id="globalBody">
+<body id="globalBody">	
 	  <?php
 		include_once('hilfs_funktionen.php');
-		$dbh = db_connect("marzian_ws");
 		echo "<div class='wrapperLogin'>";
 			echo "<div class='Aligner'></div>";
 			echo "<div class='Aligner'>
@@ -22,10 +21,9 @@ session_start();
 					</a>
 					</div>";		
 			echo "<div class='Aligner'>";
-			echo db_show_query("select * from produkt",$dbh);
+				echo loginForm();
 			echo "</div>";
-		echo "</div>";
-		db_close($dbh);
+		echo "</div>";		
 	  ?>
 </body>
 </html>
