@@ -10,8 +10,7 @@
 <body id="globalBody">	
 	  <?php
 		include_once('hilfs_funktionen.php');		
-		$dbh = db_connect("marzian_ws");
-		
+		$dbh = db_connect("marzian_ws");		
 	  ?>
 </body>
 </html>

@@ -67,6 +67,11 @@
 		mysqli_close($dbh);
 	}
 	function zeigeParameter(){
-		
+		if(isset($_POST)){
+			print_r($_POST);
+		}		
+		if(isset($_SESSION)){
+			print_r($_SESSION);
+		}
 	}
 ?>
