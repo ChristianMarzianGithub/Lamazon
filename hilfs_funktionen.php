@@ -130,8 +130,12 @@
 	function neuAnmeldung()
 	{
 		if((isset($_POST['kennungNeu'])&&(isset($_POST['passwordNeu'])))&&(($_POST['kennungNeu']!=""))&&($_POST['passwordNeu']!="")){	
-		}
-		
+			if(legeNeuenKundenAn($_POST['kennungNeu'],$_POST['passwordNeu'])){
+				$_SESSION['AnmeldungOK'] = 1;
+			}else{
+				$_SESSION['AnmeldungOK'] = 2;
+			}
+		}		
 		$output = "
 			<h5>oder:</h5></br><h5>Neuanmeldung</h5></br>
 			<form method='post' action='".$_SERVER["PHP_SELF"]."'>
@@ -150,9 +154,17 @@
 			if($_SESSION['AnmeldungOK']==1){
 				$output = $output."</br>neuer Kunde erfolgreich angelegt.";
 			}else if($_SESSION['AnmeldungOK']==2){
-				$output = $output."</br>neuen Kunden angelegen fehlgeschlagen.";
+				$output = $output."</br>neuen Kunden anlegen fehlgeschlagen.";
 			}
-		}		
+		}
+		
 		return $output;
+	}
+	function legeNeuenKundenAn($kennungNeu,$passwordNeu){
+		$dbh = db_connect("marzian_ws");
+		$output = false;
+		$sql = "INSERT INTO kunde(Kennung,Passwort)VALUES('".$kennungNeu."','".$passwordNeu."')";
+		db_query($sql, $dbh);		
+		return db_exist("SELECT * FROM KUNDE WHERE Kennung='".$kennungNeu."' AND Passwort='".$passwordNeu."'", $dbh);
 	}
 ?>
