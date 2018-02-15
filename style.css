@@ -34,6 +34,9 @@
 	flex-direction: column;
 	align-items: center;
 }
+.wrapperColumnLogin{
+
+}
 
 .btn-primary,.btn-primary:hover,  .btn-primary:active, .btn-primary:visited {
     background-color: #feae3d !important;

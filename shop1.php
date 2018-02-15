@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <html>
 
 <head>
@@ -26,6 +23,7 @@ session_start();
 			echo "</div>";
 		echo "</div>";
 		db_close($dbh);
+		session_write_close();
 	  ?>
 </body>
 </html>

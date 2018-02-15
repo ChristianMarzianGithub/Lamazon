@@ -7,7 +7,8 @@
 
 	function db_query($sql, $dbh)
 	{
-		return mysqli_query($dbh, $sql);
+		$result = mysqli_query($dbh, $sql);
+		return $result;
 	}
 
 	function db_show_query($sql, $dbh)
@@ -54,7 +55,8 @@
 								</div>";
 			return $output;
 	}
-	function db_exist($sql, $dbh)	{
+	function db_exist($sql, $dbh)
+	{
 		$result = db_query($sql,$dbh);
 		$output = false;
 		while($row = mysqli_fetch_row($result))
@@ -63,10 +65,12 @@
 			}
 		return $output;		
 	}
-	function db_close($dbh){
+	function db_close($dbh)
+	{
 		mysqli_close($dbh);
 	}
-	function zeigeParameter(){
+	function zeigeParameter()
+	{
 		if(isset($_POST)){
 			print_r($_POST);
 		}		
@@ -74,24 +78,81 @@
 			print_r($_SESSION);
 		}
 	}
-	function login($kennung, $password, $dbh)	{
+	function login($kennung, $password, $dbh)
+	{
 		$loginCorrect = false;
-		
-		$resultPassword = db_query("SELECT PASSWORT FROM KUNDE WHERE KENNUNG ='test'", $dbh);
+		$sql = "SELECT PASSWORT FROM KUNDE WHERE KENNUNG ='".$kennung."'";
+		$resultPassword = db_query($sql, $dbh);
 		$resultPasswordString = mysqli_fetch_row($resultPassword);		
 		if($password == $resultPasswordString[0]){
 			$loginCorrect = true;
 		}
 		return $loginCorrect;
 	}
-	function loginForm(){
-		$output = "Anmeldung nicht erfolgreich </br><a href='ws1.php'>zur&uuml;ck zum Login</a>";		
-		$dbh = db_connect('marzian_ws');
-		if(login($_POST['kennung'],$_POST['password'],$dbh)){
-			$output = "Anmeldung erfolgreich";
-			$output = $output."</br><a href='shop1.php'>zur Produktauswahl</a>";
-			$_SESSION['kennung'] = $_POST['kennung'];
+	function loginForm($kennung, $password)
+	{
+		if($kennung&&$password)
+		{
+			$output = "Anmeldung nicht erfolgreich </br><a href='ws1.php'>zur&uuml;ck zum Login</a>";		
+			$dbh = db_connect('marzian_ws');
+			if(login($kennung,$password,$dbh)){
+				$output = "Anmeldung erfolgreich";
+				$output = $output."</br><a href='shop1.php'>zur Produktauswahl</a>";
+				$_SESSION['kennung'] = $_POST['kennung'];
+			}
 		}
+		else
+		{
+			$output = "Fehler: keine Eingabe";
+		}
+		
+		return $output;
+	}
+	function Anmeldung()
+	{
+		$output = "<form method='post' action='ws2.php'>
+			  <div class='form-group'>
+				<label for='exampleInputEmail1'>Kennung</label>
+				<input type='text' name='kennung' class='form-control' aria-describedby='emailHelp' id='exampleInputEmail1'  placeholder='Kennung'>		
+			  </div>
+			  <div class='form-group'>
+				<label for='exampleInputPassword1'>Password</label>
+				<input type='password' name='password' class='form-control' id='exampleInputPassword1' placeholder='Password'>
+			  </div>
+			  <div class='form-check'>
+				<input type='checkbox' name='eingeloggtBleiben' class='form-check-input' id='exampleCheck1'>
+				<label class='form-check-label' for='exampleCheck1'>Eingeloggt bleiben</label>
+			  </div>
+			  <button type='submit' class='btn btn-primary'>Login</button>
+			</form>";
+		return $output;
+	}
+	function neuAnmeldung()
+	{
+		if((isset($_POST['kennungNeu'])&&(isset($_POST['passwordNeu'])))&&(($_POST['kennungNeu']!=""))&&($_POST['passwordNeu']!="")){	
+		}
+		
+		$output = "
+			<h5>oder:</h5></br><h5>Neuanmeldung</h5></br>
+			<form method='post' action='".$_SERVER["PHP_SELF"]."'>
+			  <div class='form-group'>
+				<label for='exampleInputEmail1'>Kennung</label>
+				<input type='text' name='kennungNeu' class='form-control' aria-describedby='emailHelp' id='exampleInputEmail1'  placeholder='Kennung'>		
+			  </div>
+			  <div class='form-group'>
+				<label for='exampleInputPassword1'>Password</label>
+				<input type='password' name='passwordNeu' class='form-control' id='exampleInputPassword1' placeholder='Password'>
+			  </div>
+			  <button type='submit' class='btn btn-primary'>Anmelden</button>
+			</form>
+		";
+		if(isset($_SESSION['AnmeldungOK'])){
+			if($_SESSION['AnmeldungOK']==1){
+				$output = $output."</br>neuer Kunde erfolgreich angelegt.";
+			}else if($_SESSION['AnmeldungOK']==2){
+				$output = $output."</br>neuen Kunden angelegen fehlgeschlagen.";
+			}
+		}		
 		return $output;
 	}
 ?>

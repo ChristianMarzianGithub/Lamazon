@@ -21,8 +21,8 @@ session_start();
 					</a>
 					</div>";		
 			echo "<div class='Aligner'>";
-				echo loginForm();
-			echo "</div>";
+				echo loginForm($_POST['kennung'],$_POST['password']);
+			echo "</div>";			
 		echo "</div>";		
 	  ?>
 </body>
