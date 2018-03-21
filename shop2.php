@@ -7,26 +7,13 @@
 </head>
 
 <body id="globalBody">
-	  <?php
+	  <?php		
 		include_once('hilfs_funktionen.php');
 		$dbh = db_connect("marzian_ws");
-		session_start();
-		
-		
-		
+		session_start();		unset($_SESSION['warenkorb']);
 		echo "Es wurden folgende Artikel zum Warenkorb hinzugef&uuml;gt:";
-		
-		$AnzahlWerteTabelleProdukt = getAnzahlWerteInTabelle('produkt','ArtNr');		if(isset($_SESSION['warenkorb']))		{			$counter = count($_SESSION['warenkorb']);			echo "fall 1";					}		else		{			$counter = 0;			echo "fall 2";		}
-		
-		for($i = 1; $i <= $AnzahlWerteTabelleProdukt;$i++)
-		{
-			if(isset($_POST[$i]))
-			{								
-				$warenKorb[$counter] = $i;
-				++$counter;
-			}
-		}		
-		if(isset($warenKorb))		{			$_SESSION['warenkorb'] = $warenKorb;			echo "<br>".gibProdukteArrayAlsTabelleAus($warenKorb)."<br>";		}			
+		$counter = 0;
+		$AnzahlWerteTabelleProdukt = getAnzahlWerteInTabelle('produkt','ArtNr');				$warenkorb = array();						for($r = 0; $r <= $AnzahlWerteTabelleProdukt; $r++)			{				if(isset($_POST[$r]))				{					$warenkorb[] = $r;				}				++$counter;			}				$_SESSION['warenkorb'] = $warenkorb;		if(isset($warenkorb))		{						echo gibProdukteArrayAlsTabelleAus($warenkorb);		}		
 	  ?>
 	  <br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>
 </body>

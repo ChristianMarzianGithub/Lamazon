@@ -185,7 +185,7 @@
 	
 	function gibProdukteArrayAlsTabelleAus($produkteArray)
 	{
-		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		if((Count($produkteArray))>0)		{			for($i = 1; $i <= Count($produkteArray);$i++)			{				if($i == 1)				{										$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];						}						}					$sql = $sql.")";		}		else		{				$sql = "Produkte-Array leer";		}		
+		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);		echo $count;		if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		else		{				$sql = "Produkte-Array leer";		}				$sql = $sql.");";
 		return $sql;
 	}	
 ?>
