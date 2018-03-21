@@ -18,21 +18,8 @@
 			$output = "<div class='container'>
 						<table border = '1' class='table table-hover'>";		
 			$result = db_query($sql,$dbh);
+										while($row = mysqli_fetch_row($result))				{									$output = $output."<tr>";					for($i= 0; $i <= (count($row)-1); $i++)					{											$output = $output."<td>" . $row[$i]. "</td>";										}					$output = $output."<td><input type='checkbox' name='$counter'></input></td>";					$output = $output."</tr>";						++$counter;					}							$output = $output."</table>										</div>";				
 			
-			while($row = mysqli_fetch_row($result))
-			{
-				
-				$output = $output."<tr>";
-				for($i= 0; $i <= (count($row)-1); $i++)
-				{					
-					$output = $output."<td>" . $row[$i]. "</td>";					
-				}
-				$output = $output."<td><input type='checkbox' name='$counter'></input></td>";
-				$output = $output."</tr>";	
-				++$counter;
-			}		
-			$output = $output."</table>
-								</div>";
 			return $output;
 	}
 
@@ -185,7 +172,6 @@
 	
 	function gibProdukteArrayAlsTabelleAus($produkteArray)
 	{
-		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);		echo $count;		if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		else		{				$sql = "Produkte-Array leer";		}				$sql = $sql.");";
-		return $sql;
+		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);				if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		$sql = $sql.");";						$dbh = db_connect("marzian_ws");		echo db_show_query($sql, $dbh);
 	}	
 ?>

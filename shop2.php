@@ -10,10 +10,9 @@
 	  <?php		
 		include_once('hilfs_funktionen.php');
 		$dbh = db_connect("marzian_ws");
-		session_start();		unset($_SESSION['warenkorb']);
-		echo "Es wurden folgende Artikel zum Warenkorb hinzugef&uuml;gt:";
-		$counter = 0;
-		$AnzahlWerteTabelleProdukt = getAnzahlWerteInTabelle('produkt','ArtNr');				$warenkorb = array();						for($r = 0; $r <= $AnzahlWerteTabelleProdukt; $r++)			{				if(isset($_POST[$r]))				{					$warenkorb[] = $r;				}				++$counter;			}				$_SESSION['warenkorb'] = $warenkorb;		if(isset($warenkorb))		{						echo gibProdukteArrayAlsTabelleAus($warenkorb);		}		
+		session_start();		$warenkorb = $_SESSION['warenkorb'];
+		echo "Es wurden folgende Artikel zum Warenkorb hinzugef&uuml;gt:<br>";		
+		$AnzahlWerteTabelleProdukt = getAnzahlWerteInTabelle('produkt','ArtNr');								for($r = 0; $r <= $AnzahlWerteTabelleProdukt; $r++)			{				if(isset($_POST[$r]))				{									if(in_array($r,$warenkorb))					{						echo "<br> Der Artikel mit der Artikelnummer ".$r." befindet sich bereits im Warenkorb.<br>";					}					else					{						$warenkorb[] = $r;					}				}							}				$_SESSION['warenkorb'] = $warenkorb;		if(isset($warenkorb))		{						echo gibProdukteArrayAlsTabelleAus($warenkorb);		}		
 	  ?>
 	  <br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>
 </body>
