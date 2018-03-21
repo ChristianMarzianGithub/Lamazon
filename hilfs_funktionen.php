@@ -11,7 +11,7 @@
 		return $result;
 	}
 
-	function db_show_query($sql, $dbh)
+	function db_show_query($sql, $dbh)
 	{
 			$counter = 1;
 			$dbh = db_connect("marzian_ws");		
@@ -183,25 +183,9 @@
 		return $output;
 	}	
 	
-	function gibProdukteArrayAlsTabelleAus($produkteArray)
-	{
-		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";
-		for($i = 0; $i < Count($produkteArray);$i++)
-		{
-			if($i == 0)
-			{
-				$sql = $sql.$produkteArray[$i];
-			}else
-			{
-				$sql = $sql.",".$produkteArray[$i];		
-			}			
-		}		
-		$sql = $sql.")";
-		
-		
-
-
-		
-		return $sql;
+	function gibProdukteArrayAlsTabelleAus($produkteArray)
+	{
+		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		if((Count($produkteArray))>0)		{			for($i = 1; $i <= Count($produkteArray);$i++)			{				if($i == 1)				{										$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];						}						}					$sql = $sql.")";		}		else		{				$sql = "Produkte-Array leer";		}		
+		return $sql;
 	}	
 ?>

@@ -10,9 +10,9 @@
 	  <?php
 		include_once('hilfs_funktionen.php');
 		$dbh = db_connect("marzian_ws");
-		session_start();
-		$var = $_SESSION['warenkorb'];
-		echo gibProdukteArrayAlsTabelleAus($var);			
+		session_start();		if(isset($_SESSION['warenkorb']))		{
+			$var = $_SESSION['warenkorb'];			echo gibProdukteArrayAlsTabelleAus($var);			}
+				
 	  ?>	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
 </body>
 </html>

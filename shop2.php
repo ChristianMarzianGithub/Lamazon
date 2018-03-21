@@ -16,26 +16,17 @@
 		
 		echo "Es wurden folgende Artikel zum Warenkorb hinzugef&uuml;gt:";
 		
-		$AnzahlWerte = getAnzahlWerteInTabelle('produkt','ArtNr');
-		$counter = 0;
-		for($i = 1; $i <= getAnzahlWerteInTabelle('produkt','ArtNr');$i++)
-		{
-			if(isset($_POST[$i]))
-			{								
-				$warenKorb[$counter] = $i;
-				++$counter;
-			}
+		$AnzahlWerteTabelleProdukt = getAnzahlWerteInTabelle('produkt','ArtNr');		if(isset($_SESSION['warenkorb']))		{			$counter = count($_SESSION['warenkorb']);			echo "fall 1";		}		else		{			$counter = 0;			echo "fall 2";		}
+		
+		for($i = 1; $i <= $AnzahlWerteTabelleProdukt;$i++)
+		{
+			if(isset($_POST[$i]))
+			{								
+				$warenKorb[$counter] = $i;
+				++$counter;
+			}
 		}		
-		
-		if(isset($warenKorb))
-		{
-			$_SESSION['warenkorb'] = $warenKorb;
-		}					
-		
-		
-		
-		
-		
+		if(isset($warenKorb))		{			$_SESSION['warenkorb'] = $warenKorb;			echo "<br>".gibProdukteArrayAlsTabelleAus($warenKorb)."<br>";		}			
 	  ?>
 	  <br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>
 </body>
