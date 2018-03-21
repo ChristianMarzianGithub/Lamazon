@@ -19,7 +19,7 @@
 						<table border = '1' class='table table-hover'>";		
 			$result = db_query($sql,$dbh);
 			
-			while($row = mysqli_fetch_row($result))
+			while($row = mysqli_fetch_row($result))
 			{
 				
 				$output = $output."<tr>";

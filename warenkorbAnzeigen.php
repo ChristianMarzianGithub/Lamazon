@@ -12,7 +12,7 @@
 		$dbh = db_connect("marzian_ws");
 		session_start();
 		$var = $_SESSION['warenkorb'];
-		echo gibProdukteArrayAlsTabelleAus($var);	
-	  ?>
+		echo gibProdukteArrayAlsTabelleAus($var);			
+	  ?>	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
 </body>
 </html>

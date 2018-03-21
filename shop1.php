@@ -11,17 +11,17 @@
 	  <?php
 		session_start();
 		include_once('hilfs_funktionen.php');
-		$dbh = db_connect("marzian_ws");
+		$dbh = db_connect("marzian_ws");		
 		echo "<div class='wrapperLogin'>";
 			echo "<div class='Aligner'></div>";
 			echo "<div class='Aligner'>
 					<a href='index.html'>
 						<img src='Unbenannt.png' alt='im Shop anmelden'>
 					</a>
-					</div>";							
+					</div>";										echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>";
 			echo "<div class='Aligner'>";
 				echo "<form action='shop2.php' method='POST'>";
-					echo "<input type='submit' value='Warenkorb hinzufügen'></input>";
+					echo "<input type='submit' value='Warenkorb hinzuf&uuml;gen'></input>";
 					echo db_show_query("select * from produkt",$dbh);
 				echo "</form>";
 			echo "</div>";
@@ -30,7 +30,7 @@
 		
 		$_SESSION['var'] = "af";
 		$var = $_SESSION['var'];
-		echo $var;
+		//echo $var;
 	  ?>
 </body>
 </html>
