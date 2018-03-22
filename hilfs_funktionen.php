@@ -9,20 +9,16 @@
 	{
 		$result = mysqli_query($dbh, $sql);
 		return $result;
-	}
-
+	}
 	function db_show_query($sql, $dbh)
-	{
-			$counter = 1;
-			$dbh = db_connect("marzian_ws");		
-			$output = "<div class='container'>
-						<table border = '1' class='table table-hover'>";		
-			$result = db_query($sql,$dbh);
-										while($row = mysqli_fetch_row($result))				{									$output = $output."<tr>";					for($i= 0; $i <= (count($row)-1); $i++)					{											$output = $output."<td>" . $row[$i]. "</td>";										}					$output = $output."<td><input type='checkbox' name='$counter'></input></td>";					$output = $output."</tr>";						++$counter;					}							$output = $output."</table>										</div>";				
-			
-			return $output;
-	}
-
+	{
+			$counter = 1;
+			$dbh = db_connect("marzian_ws");		
+			$output = "<div class='container'>
+						<table border = '1' class='table table-hover'>";
+			$result = db_query($sql,$dbh);					while($row = mysqli_fetch_row($result))				{									$output = $output."<tr>";					for($i= 0; $i <= (count($row)-1); $i++)					{											$output = $output."<td>" . $row[$i]. "</td>";									}					$output = $output."<td><input type='checkbox' name='$counter'></input></td>";					$output = $output."</tr>";						++$counter;					}							$output = $output."</table>										</div>";	
+			return $output;
+	}
 	function db_create_checkbox($sql,$dbh,$name)
 	{		
 		$dbh = db_connect("marzian_ws");		
@@ -158,20 +154,18 @@
 		return db_exist("SELECT * FROM KUNDE WHERE Kennung='".$kennungNeu."' AND Passwort='".$passwordNeu."'", $dbh);
 	}
 	
-	function getAnzahlWerteInTabelle($table,$pk)
-	{	$output = 0;	
-		$sql = "SELECT COUNT(".$pk.") AS ANZAHL FROM ".$table;
-		$dbh = db_connect("marzian_ws");		
-		$result = db_query($sql, $dbh);		
-		
-		$row = mysqli_fetch_row($result);
-		$output = $row[0];		
-		
-		return $output;
+	function getAnzahlWerteInTabelle($table,$pk)
+	{			$output = 0;	
+		$sql = "SELECT COUNT(".$pk.") AS ANZAHL FROM ".$table;
+		$dbh = db_connect("marzian_ws");	
+		$result = db_query($sql, $dbh);		
+		$row = mysqli_fetch_row($result);
+		$output = $row[0];		
+		return $output;
 	}	
 	
 	function gibProdukteArrayAlsTabelleAus($produkteArray)
 	{
 		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);				if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		$sql = $sql.");";						$dbh = db_connect("marzian_ws");		echo db_show_query($sql, $dbh);
-	}			function zeigeWarenkorbZumBestellenAn($produkteArray)	{		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);		if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		$sql = $sql.");";					$dbh = db_connect("marzian_ws");		$counter = 1;			$dbh = db_connect("marzian_ws");				$output = "<div class='container'>						<form method='POST' action='verabschiedung.php'>						<table border = '1' class='table table-hover'>						<tr>							<th>ArtNr</th>							<th>Bezeichnung</th>							<th>Kategorie</th>							<th>Preis</th>							<th>Anzahl</th>						</tr>												";											$result = db_query($sql,$dbh);										while($row = mysqli_fetch_row($result))				{									$output = $output."<tr>";										for($i= 0; $i <= (count($row)-1); $i++)					{											$output = $output."<td>" . $row[$i]. "</td>";					}										$output = $output."<td><input type='number' value='1' name='$counter'></input></td>";					$output = $output."</tr>";						++$counter;				}							$output = $output."					</table>										<button type='submit' class='btn btn-primary'>Produkte jetzt bestellen !</button>					</form>					</div>";				return $output;	}		function getNewBID()	{		$sql = "SELECT max(BID)+1 from Bestellung";		$dbh = db_connect("marzian_ws");		$result = db_query($sql,$dbh);				db_close($dbh);						$row = mysqli_fetch_row($result);				return $row[0];	}		function getKID($kennung)	{		$sql = "SELECT KID FROM KUNDE WHERE Kennung = '".$kennung."'";		$dbh = db_connect("marzian_ws");		$result = db_query($sql,$dbh);				db_close($dbh);				$row = mysqli_fetch_row($result);				return $row[0];	}	function insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID)	{		//erste freie BestellungsID bekommen								for($i = 0; $i < count($produkteArray); $i++)		{			$sql = "INSERT INTO BESTELLUNG (BID,KundeID,ArtNr,Anzahl) VALUES(".$BID.",".$KID.",".$produkteArray[$i].",".$AnzahlProdukteArray[$i];			$sql = $sql.");";										$dbh = db_connect("marzian_ws");			$sql."<br>";			db_query($sql, $dbh);					db_close($dbh);		}	}	function insertRechnung($BID)	{		$uhrzeit = date("H:i");		$datum = date("d.m.Y");		$sql = "INSERT INTO Rechnung(BID,DATUM,UHRZEITERSTELLUNG)VALUES(".$BID.",'".$datum."','".$uhrzeit."')"; 					$dbh = db_connect("marzian_ws");		$sql."<br>";		db_query($sql, $dbh);				db_close($dbh);	}		
+	}			function zeigeWarenkorbZumBestellenAn($produkteArray)	{		$sql = "SELECT * FROM PRODUKT WHERE ARTNR in(";		$count = Count($produkteArray);		if(isset($produkteArray))		{			for($i = 0;$i < $count; $i++)			{				if($i == 0)				{					$sql = $sql.$produkteArray[$i];				}				else				{					$sql = $sql.",".$produkteArray[$i];				}			}					}		$sql = $sql.");";					$dbh = db_connect("marzian_ws");		$counter = 1;			$dbh = db_connect("marzian_ws");				$output = "<div class='container'>						<form method='POST' action='verabschiedung.php'>						<table border = '1' class='table table-hover'>						<tr>							<th>ArtNr</th>							<th>Bezeichnung</th>							<th>Kategorie</th>							<th>Preis</th>							<th>Anzahl</th>						</tr>												";											$result = db_query($sql,$dbh);										while($row = mysqli_fetch_row($result))				{									$output = $output."<tr>";										for($i= 0; $i <= (count($row)-1); $i++)					{											$output = $output."<td>" . $row[$i]. "</td>";					}										$output = $output."<td><input type='number' value='1' name='$counter'></input></td>";					$output = $output."</tr>";						++$counter;				}							$output = $output."					</table>										<button type='submit' class='btn btn-primary'>Produkte jetzt bestellen !</button>					</form>					</div>";				return $output;	}		function getNewBID()	{		$sql = "SELECT max(BID)+1 from Bestellung";		$dbh = db_connect("marzian_ws");		$result = db_query($sql,$dbh);				db_close($dbh);						$row = mysqli_fetch_row($result);				return $row[0];	}		function getKID($kennung)	{		$sql = "SELECT KID FROM KUNDE WHERE Kennung = '".$kennung."'";		$dbh = db_connect("marzian_ws");		$result = db_query($sql,$dbh);				db_close($dbh);				$row = mysqli_fetch_row($result);				return $row[0];	}	function insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID)	{		for($i = 0; $i < count($produkteArray); $i++)		{			$sql = "INSERT INTO BESTELLUNG (BID,KundeID,ArtNr,Anzahl) VALUES(".$BID.",".$KID.",".$produkteArray[$i].",".$AnzahlProdukteArray[$i];			$sql = $sql.");";										$dbh = db_connect("marzian_ws");			$sql."<br>";			db_query($sql, $dbh);					db_close($dbh);		}	}	function insertRechnung($BID)	{		$uhrzeit = date("H:i");		$datum = date("d.m.Y");		$sql = "INSERT INTO Rechnung(BID,DATUM,UHRZEITERSTELLUNG)VALUES(".$BID.",'".$datum."','".$uhrzeit."')"; 					$dbh = db_connect("marzian_ws");		$sql."<br>";		db_query($sql, $dbh);				db_close($dbh);	}	function KategorieComboBox()	{		$sql = "SELECT KatID,Beschreibung from kategorie";		$dbh = db_connect("marzian_ws");		$result = db_query($sql, $dbh);				db_close($dbh);				$output = "<select name='FilterKatid'>						<option value=''>keine Filterung</option>		";															while($row = mysqli_fetch_row($result))					{							$output = $output."<option value=".$row[0].">".$row[1]."</option>";					}									$output = $output."</select>";		return $output;			}
 ?>
