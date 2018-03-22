@@ -15,16 +15,16 @@
 		echo "<div class='wrapperLogin'>";
 			echo "<div class='Aligner'></div>";
 			echo "<div class='Aligner'>
-					<a href='index.html'>
-						<img src='Unbenannt.png' alt='im Shop anmelden'>
+					<a href='index.html'>
+						<img src='Unbenannt.png' alt='im Shop anmelden'>
 					</a>
 					</div>";										echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>									<br>						<a href = 'Kasse.php'>zur Kasse</a>					<br>					";
-			echo "<div class='Aligner'>";
-				echo "<form action='shop2.php' method='POST'>";
-					echo "<input type='submit' value='Warenkorb hinzuf&uuml;gen'></input>";
-					echo db_show_query("select * from produkt",$dbh);
-				echo "</form>";
-			echo "</div>";
+			echo "<div class='Aligner'>";
+				echo "<form action='shop2.php' method='POST'>";
+					echo "<input type='submit' value='Warenkorb hinzuf&uuml;gen'></input>";
+					echo db_show_query("select * from produkt",$dbh);
+				echo "</form>";
+			echo "</div>";
 		echo "</div>";
 		db_close($dbh);
 		

@@ -23,10 +23,20 @@
 		$dbh = db_connect("marzian_ws");
 
 		session_start();
-		
+		//phpinfo();
+		$produkteArray = $_SESSION['warenkorb'];
+		$maxAnzahlProdukte = count($produkteArray);
+		$AnzahlProdukteArray = array();
 		//Insert in Rechnung und Bestellung machen
+		for($i = 0;$i < $maxAnzahlProdukte;$i++)
+		{
+			$AnzahlProdukteArray[$i] = $_POST[$i+1];
+			
+		}
 		
 		
+		insertRechnung($produkteArray,$AnzahlProdukteArray);
+		//insertBestellung();		
 	  ?>
 
 	  <br>
@@ -36,3 +46,36 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

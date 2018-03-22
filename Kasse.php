@@ -24,7 +24,6 @@
 
 		session_start();
 		
-		//Spalte mit Anzahl einfügen
 		//alles an Verabschiedung.php schicken
 		
 		if(isset($_SESSION['warenkorb']))
@@ -32,11 +31,9 @@
 			$var = $_SESSION['warenkorb'];
 			echo zeigeWarenkorbZumBestellenAn($var);	
 		}		
-		
 	  ?>
 
-	  <br>
-	  <a href = "verabschiedung.php">Produkte jetzt bestellen !</a>
+	  
 	  <br>
 	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
 	  <br>
