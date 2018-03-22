@@ -18,7 +18,7 @@
 					<a href='index.html'>
 						<img src='Unbenannt.png' alt='im Shop anmelden'>
 					</a>
-					</div>";										echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>";
+					</div>";										echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>									<br>						<a href = 'Kasse.php'>zur Kasse</a>					<br>					";
 			echo "<div class='Aligner'>";
 				echo "<form action='shop2.php' method='POST'>";
 					echo "<input type='submit' value='Warenkorb hinzuf&uuml;gen'></input>";

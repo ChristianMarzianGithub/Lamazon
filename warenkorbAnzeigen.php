@@ -13,6 +13,6 @@
 		session_start();		if(isset($_SESSION['warenkorb']))		{
 			$var = $_SESSION['warenkorb'];			echo gibProdukteArrayAlsTabelleAus($var);			}
 				
-	  ?>	  <br>	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>	  <br>	  <a href = "warenKorbKomplettLoeschen.php">Warenkorb komplett l&ouml;schen</a>	  <br>
+	  ?>	  <br>	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>	  <br>	  <a href = "warenKorbKomplettLoeschen.php">Warenkorb komplett l&ouml;schen</a>	  <br>	   <a href = "Kasse.php">zur Kasse</a>	  <br>
 </body>
 </html>
