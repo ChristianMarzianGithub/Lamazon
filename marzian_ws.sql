@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 13. Feb 2018 um 12:55
+-- Erstellungszeit: 22. Mrz 2018 um 12:17
 -- Server-Version: 10.1.30-MariaDB
 -- PHP-Version: 7.2.1
 
@@ -41,6 +41,31 @@ CREATE TABLE `benutzer` (
 INSERT INTO `benutzer` (`BenutzerID`, `Kennung`, `Passwort`) VALUES
 (1, 'Test', 'TestPasswort'),
 (2, 'admin', 'root');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bestellung`
+--
+
+CREATE TABLE `bestellung` (
+  `BID` int(11) NOT NULL,
+  `KundeID` int(11) NOT NULL,
+  `ArtNr` int(11) NOT NULL,
+  `Anzahl` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `bestellung`
+--
+
+INSERT INTO `bestellung` (`BID`, `KundeID`, `ArtNr`, `Anzahl`) VALUES
+(1, 1, 3, 1),
+(1, 1, 4, 1),
+(1, 1, 5, 1),
+(1, 1, 6, 1),
+(1, 1, 10, 1),
+(1, 1, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -104,6 +129,13 @@ CREATE TABLE `kunde` (
   `Passwort` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `kunde`
+--
+
+INSERT INTO `kunde` (`Kid`, `Kennung`, `Vorname`, `Nachname`, `Strasse`, `PLZ`, `Ort`, `KontoNummer`, `BLZ`, `BankInstitut`, `Passwort`) VALUES
+(1, 'g', '', '', '', '', '', '', '', '', 'h');
+
 -- --------------------------------------------------------
 
 --
@@ -142,10 +174,21 @@ INSERT INTO `produkt` (`ArtNr`, `Name`, `Beschreibung`, `Preis`) VALUES
 --
 
 CREATE TABLE `rechnung` (
+  `RID` int(11) NOT NULL,
   `BID` int(11) NOT NULL,
   `Datum` date NOT NULL,
   `UhrzeitErstellung` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `rechnung`
+--
+
+INSERT INTO `rechnung` (`RID`, `BID`, `Datum`, `UhrzeitErstellung`) VALUES
+(1, 1, '0000-00-00', '0000-00-00 00:00:00'),
+(2, 1, '0000-00-00', '0000-00-00 00:00:00'),
+(3, 1, '0000-00-00', '0000-00-00 00:00:00'),
+(4, 1, '0000-00-00', '0000-00-00 00:00:00');
 
 --
 -- Indizes der exportierten Tabellen
@@ -156,6 +199,12 @@ CREATE TABLE `rechnung` (
 --
 ALTER TABLE `benutzer`
   ADD PRIMARY KEY (`BenutzerID`);
+
+--
+-- Indizes für die Tabelle `bestellung`
+--
+ALTER TABLE `bestellung`
+  ADD PRIMARY KEY (`BID`,`KundeID`,`ArtNr`);
 
 --
 -- Indizes für die Tabelle `hersteller`
@@ -185,7 +234,7 @@ ALTER TABLE `produkt`
 -- Indizes für die Tabelle `rechnung`
 --
 ALTER TABLE `rechnung`
-  ADD PRIMARY KEY (`BID`);
+  ADD PRIMARY KEY (`RID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -213,7 +262,7 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT für Tabelle `kunde`
 --
 ALTER TABLE `kunde`
-  MODIFY `Kid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Kid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT für Tabelle `produkt`
@@ -225,7 +274,7 @@ ALTER TABLE `produkt`
 -- AUTO_INCREMENT für Tabelle `rechnung`
 --
 ALTER TABLE `rechnung`
-  MODIFY `BID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
