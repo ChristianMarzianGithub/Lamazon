@@ -30,13 +30,14 @@
 		//Insert in Rechnung und Bestellung machen
 		for($i = 0;$i < $maxAnzahlProdukte;$i++)
 		{
-			$AnzahlProdukteArray[$i] = $_POST[$i+1];
-			
+			$AnzahlProdukteArray[$i] = $_POST[$i+1];			
 		}
 		
-		
-		insertRechnung($produkteArray,$AnzahlProdukteArray);
-		//insertBestellung();		
+		$BID = getNewBID();
+		$KID = 1;
+		insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID);
+		insertRechnung($BID);	
+		$_SESSION['warenkorb'] = array();
 	  ?>
 
 	  <br>
