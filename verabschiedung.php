@@ -34,10 +34,10 @@
 		}
 		
 		$BID = getNewBID();
-		$KID = 1;
+		$KID = getKID($_SESSION['kennung']);
 		insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID);
-		insertRechnung($BID);	
-		$_SESSION['warenkorb'] = array();
+		insertRechnung($BID);
+		$_SESSION['warenkorb'] = array();		
 	  ?>
 
 	  <br>
@@ -45,7 +45,6 @@
 	  <br>	  
 	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
 </body>
-
 </html>
 
 
