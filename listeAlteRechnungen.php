@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -15,50 +17,47 @@
 
 
 <body id="globalBody">
-
 	  <?php
-		
-		include_once('hilfs_funktionen.php');
-
-		$dbh = db_connect("marzian_ws");
-
 		session_start();
-		//phpinfo();
-		$produkteArray = $_SESSION['warenkorb'];
-		$maxAnzahlProdukte = count($produkteArray);
-		$AnzahlProdukteArray = array();
-		//Insert in Rechnung und Bestellung machen
-		for($i = 0;$i < $maxAnzahlProdukte;$i++)
+		include_once('hilfs_funktionen.php');
+		$dbh = db_connect("marzian_ws");
+		
+		$sql = "select * from produkt";
+		
+		
+		
+		if(isset($_POST['FilterKatid']))
 		{
-			$AnzahlProdukteArray[$i] = $_POST[$i+1];			
+			if($_POST['FilterKatid'] != 0)
+			{
+				$sql = $sql." where katid =".$_POST['FilterKatid'];
+			}
 		}
 		
-		$BID = getNewBID();
-		$KID = getKID($_SESSION['kennung']);
-		insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID);
-		insertRechnung($BID);
-		$_SESSION['warenkorb'] = array();		
-	  ?>
+		echo "<div class='wrapperLogin'>";			
+			echo "<div class='Aligner'>
+		
+					<a href='index.html'>
+						<img src='Unbenannt.png' alt='im Shop anmelden'>
+					</a>
 
-	  <br>
-		<p>Vielen Dank für Ihren Einkauf</p>
-	  <br>	  
-	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
-	  <br>	  
-	  <a href = "listeAlteRechnungen.php">alte Rechnungen</a>
+					</div>";							
+			
+			
+			
+			echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>				
+					<br>
+						<a href = 'Kasse.php'>zur Kasse</a>
+					<br>	
+					<a href='ws1.php'>Log Out</a>
+				";
+				
+		echo showAlteRechnungen();
+		echo "</div>";		
+		
+	  ?>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

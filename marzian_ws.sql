@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Mrz 2018 um 13:45
+-- Erstellungszeit: 22. Mrz 2018 um 16:27
 -- Server-Version: 10.1.30-MariaDB
 -- PHP-Version: 7.2.1
 
@@ -76,7 +76,14 @@ INSERT INTO `bestellung` (`BID`, `KundeID`, `ArtNr`, `Anzahl`) VALUES
 (5, 1, 4, 1),
 (6, 2, 3, 1),
 (6, 2, 4, 1),
-(7, 1, 1, 1);
+(7, 1, 1, 1),
+(8, 1, 2, 1),
+(8, 1, 3, 1),
+(9, 1, 5, 1),
+(9, 1, 6, 1),
+(9, 1, 7, 1),
+(10, 1, 4, 1),
+(10, 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +215,14 @@ INSERT INTO `rechnung` (`RID`, `BID`, `Datum`, `UhrzeitErstellung`) VALUES
 (8, 5, '0000-00-00', '0000-00-00 00:00:00'),
 (9, 6, '0000-00-00', '0000-00-00 00:00:00'),
 (10, 6, '0000-00-00', '0000-00-00 00:00:00'),
-(11, 7, '0000-00-00', '0000-00-00 00:00:00');
+(11, 7, '0000-00-00', '0000-00-00 00:00:00'),
+(12, 8, '0000-00-00', '0000-00-00 00:00:00'),
+(13, 9, '0000-00-00', '0000-00-00 00:00:00'),
+(14, 9, '0000-00-00', '0000-00-00 00:00:00'),
+(15, 9, '0000-00-00', '0000-00-00 00:00:00'),
+(16, 9, '0000-00-00', '0000-00-00 00:00:00'),
+(17, 9, '0000-00-00', '0000-00-00 00:00:00'),
+(18, 10, '0000-00-00', '0000-00-00 00:00:00');
 
 --
 -- Indizes der exportierten Tabellen
@@ -294,7 +308,7 @@ ALTER TABLE `produkt`
 -- AUTO_INCREMENT für Tabelle `rechnung`
 --
 ALTER TABLE `rechnung`
-  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

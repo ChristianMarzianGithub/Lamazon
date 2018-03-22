@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -15,50 +17,48 @@
 
 
 <body id="globalBody">
-
 	  <?php
-		
-		include_once('hilfs_funktionen.php');
-
-		$dbh = db_connect("marzian_ws");
-
 		session_start();
-		//phpinfo();
-		$produkteArray = $_SESSION['warenkorb'];
-		$maxAnzahlProdukte = count($produkteArray);
-		$AnzahlProdukteArray = array();
-		//Insert in Rechnung und Bestellung machen
-		for($i = 0;$i < $maxAnzahlProdukte;$i++)
+		include_once('hilfs_funktionen.php');
+		$dbh = db_connect("marzian_ws");
+		
+		$sql = "select * from produkt";
+		
+		
+		
+		
+		
+		echo "<div class='wrapperLogin'>";			
+			echo "<div class='Aligner'>
+		
+					<a href='index.html'>
+						<img src='Unbenannt.png' alt='im Shop anmelden'>
+					</a>
+
+					</div>";							
+			
+			
+			
+			echo "<br><a href='warenkorbAnzeigen.php'> Warenkorb anzeigen</a>				
+					<br>
+						<a href = 'Kasse.php'>zur Kasse</a>
+					<br>	
+					<a href='ws1.php'>Log Out</a>
+				";
+				
+		if(isset($_POST['rid']))
 		{
-			$AnzahlProdukteArray[$i] = $_POST[$i+1];			
+			echo showEinzelneAlteRechnung($_POST['rid']);			
 		}
 		
-		$BID = getNewBID();
-		$KID = getKID($_SESSION['kennung']);
-		insertBestellung($produkteArray,$AnzahlProdukteArray,$BID,$KID);
-		insertRechnung($BID);
-		$_SESSION['warenkorb'] = array();		
+		echo "
+			<br>	  
+			<a href = 'listeAlteRechnungen.php'>alte Rechnungen</a>
+		
+		</div>";			
 	  ?>
-
-	  <br>
-		<p>Vielen Dank für Ihren Einkauf</p>
-	  <br>	  
-	  <a href = "shop1.php">zur&uuml;ck zur Produkt&uuml;bersicht</a>
-	  <br>	  
-	  <a href = "listeAlteRechnungen.php">alte Rechnungen</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
